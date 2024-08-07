@@ -1,9 +1,11 @@
-import ConnectWallet from "@/components/ConnectWallet";
-
-export default function Home() {
+import Wagmi from '@/components/wagmi';
+BigInt.prototype.toJSON = function () {
+  return this.toString();
+};
+export default function App() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <ConnectWallet/>
+    <main>
+      <Wagmi />
     </main>
   );
 }
