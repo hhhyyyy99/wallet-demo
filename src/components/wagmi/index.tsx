@@ -1,10 +1,12 @@
 'use client';
 
-import { useAccount, useBalance, useConnect, useDisconnect, useSwitchChain } from 'wagmi';
+import { useAccount, useAccountEffect, useBalance, useConfig, useConnect, useDisconnect, useSwitchChain } from 'wagmi';
 import SendTransaction from './components/SendTransaction';
+import { useEffect } from 'react';
 const buttonClass = `bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`;
 const Wagmi = () => {
-  const account = useAccount();
+  const config = useConfig()
+  const account = useAccount({config});
   const { connectors, connect, status, error } = useConnect();
   const { disconnect } = useDisconnect();
   const { chains, switchChain } = useSwitchChain();
@@ -15,6 +17,7 @@ const Wagmi = () => {
         <h1 className="text-3xl font-bold">Account</h1>
         <div className="flex flex-col gap-2">
           <span>status: {account.status}</span>
+          <span>当前账户: {account.address}</span>
           <span>addresses: {JSON.stringify(account.addresses)}</span>
           <span>chainName: {account.chain?.name}</span>
           <span>chainId: {account.chainId}</span>
